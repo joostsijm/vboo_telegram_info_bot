@@ -1,4 +1,10 @@
 __pycache__/
+tests/cassettes/
+build/
 .venv/
-.env
+.tox/
+*.egg-info/
+output.log
 *.log
+*.pyc
+.env

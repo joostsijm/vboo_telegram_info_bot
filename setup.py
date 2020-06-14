@@ -16,10 +16,14 @@ setuptools.setup(
     url="gogs@git.craftbroec.nl:joostsijm/vboo_info_bot.git",
     packages=setuptools.find_packages('src'),
     package_dir={'': 'src'},
+    entry_points={
+        'console_scripts': ['vboo-info-bot=vboo_info_bot.__main__:main'],
+    },
     install_requires=[
         "python-telegram-bot",
         "python-dotenv",
         "hyperlink",
+        "rival-regions-wrapper @ git+https://github.com/jjoo914/rival_regions_wrapper.git",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
