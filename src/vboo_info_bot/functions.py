@@ -28,5 +28,4 @@ def telegram_format_article(article):
         underline,
         article_content,
     )
-    print(formatted_article)
     return formatted_article
