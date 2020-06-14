@@ -32,6 +32,9 @@ def test_article_info_one(api_wrapper, article_keys):
     assert isinstance(response['content_text'], str), "Content text should be a string"
     assert isinstance(response['content_html'], str), "Content html should be a string"
     assert isinstance(response['language'], str), "Language should be a string"
+    assert isinstance(response['content_html'], str), "Content html should be a string"
+    assert isinstance(response['language'], str), "Language should be a string"
+    assert isinstance(response['rating'], int), "Rating should be an integer"
 
 @pytest.mark.vcr()
 def test_article_info_two(api_wrapper, article_keys):
@@ -52,3 +55,6 @@ def test_article_info_two(api_wrapper, article_keys):
     assert isinstance(response['content_text'], str), "Content text should be a string"
     assert isinstance(response['content_html'], str), "Content html should be a string"
     assert isinstance(response['language'], str), "Language should be a string"
+    assert isinstance(response['content_html'], str), "Content html should be a string"
+    assert isinstance(response['language'], str), "Language should be a string"
+    assert isinstance(response['rating'], int), "Rating should be an integer"
