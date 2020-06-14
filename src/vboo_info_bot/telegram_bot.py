@@ -28,7 +28,7 @@ def text_handler(update, context):
                 article_id = url.fragment.replace('news/show/', '')
                 article = api.get_article(article_id)
                 formatted_article = functions.telegram_format_article(article)
-                update.message.reply_text(formatted_article, parse_mode=ParseMode.MARKDOWN)
+                update.message.reply_text(formatted_article, parse_mode=ParseMode.MARKDOWN_V2)
 
 
 def run():
