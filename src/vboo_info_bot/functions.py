@@ -29,3 +29,64 @@ def telegram_format_article(article):
         article_content,
     )
     return formatted_article
+
+def abbreviate(string, max_lenght):
+    """Abriviate string to only first letters"""
+    if len(string) <= max_lenght:
+        return string
+    abbreviation = ''
+    for word in string.split(' '):
+        abbreviation += word[0:1].upper()
+    return abbreviation
+
+def format_state_region(side):
+    """Format state and region name"""
+    state = '*[{}](https://m.rivalregions.com/#state/details/{})*'.format(
+        abbreviate(side['state_name'], 4),
+        side['state_id'],
+    )
+    region = '[{}](http://m.rivalregions.com/#map/details/{})'.format(
+        side['region_name'],
+        side['region_id'],
+    )
+    return '{} {}'.format(state, region)
+
+def roundk(integer):
+    """Round down number"""
+    thousand = 1
+    while integer >= 999:
+        thousand += 1
+        decimal = str(integer)[-3:-2]
+        integer = int(str(integer)[:-3])
+    return '{}\\.{}{}'.format(integer, decimal, 'k' * thousand)
+
+
+def telegram_format_war(war):
+    """Format war object for article"""
+    if 'region_name' in war['attack']:
+        title = '{} vs {}'.format(
+            format_state_region(war['attack']),
+            format_state_region(war['defend'])
+        )
+    else:
+        title = '{} vs {}'.format(
+            '*{}*'.format(war['type']),
+            format_state_region(war['defend'])
+        )
+    damage = '{} *vs* {} \\= {}'.format(
+        roundk(war['attack']['damage']),
+        roundk(war['defend']['damage']),
+        roundk(war['damage']),
+    )
+
+    link = '[mobile](https://m.rivalregions.com/#war/details/{}) \\| [desktop](http://rivalregions.com/#war/details/{})'.format(
+        war['war_id'],
+        war['war_id'],
+    )
+
+    formatted_war = '{}\n{}\n{}'.format(
+        title,
+        damage,
+        link,
+    )
+    return formatted_war

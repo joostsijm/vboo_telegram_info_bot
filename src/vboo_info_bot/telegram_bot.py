@@ -29,6 +29,11 @@ def text_handler(update, context):
                 article = api.get_article(article_id)
                 formatted_article = functions.telegram_format_article(article)
                 update.message.reply_text(formatted_article, parse_mode=ParseMode.MARKDOWN_V2)
+            elif 'war/details/' in url.fragment:
+                war_id = url.fragment.replace('war/details', '')
+                war = api.get_war(war_id)
+                formatted_war = functions.telegram_format_war(war)
+                update.message.reply_text(formatted_war, parse_mode=ParseMode.MARKDOWN_V2)
 
 
 def run():

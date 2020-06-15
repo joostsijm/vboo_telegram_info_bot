@@ -1,6 +1,7 @@
 """Wrapper test"""
 
-from rival_regions_wrapper.api_wrapper import Article
+from rival_regions_wrapper.api_wrapper import Article, War
+from telegram import ParseMode
 import pytest
 
 from vboo_info_bot import functions
@@ -58,3 +59,25 @@ def test_article_info_two(api_wrapper, article_keys):
     assert isinstance(response['content_html'], str), "Content html should be a string"
     assert isinstance(response['language'], str), "Language should be a string"
     assert isinstance(response['rating'], int), "Rating should be an integer"
+
+@pytest.mark.vcr()
+def test_formatting_war_ground(api_wrapper, telegram_bot, telegram_channel):
+    """Test format war"""
+    war_id = 329541
+    response = War(api_wrapper).info(war_id)
+
+    assert isinstance(response, dict), "The response should be a dict"
+    formatted_war = functions.telegram_format_war(response)
+    if telegram_channel:
+        telegram_bot.sendMessage(telegram_channel, formatted_war, parse_mode=ParseMode.MARKDOWN_V2)
+
+@pytest.mark.vcr()
+def test_formatting_war_coup(api_wrapper, telegram_bot, telegram_channel):
+    """Test format war"""
+    war_id = 329518
+    response = War(api_wrapper).info(war_id)
+
+    assert isinstance(response, dict), "The response should be a dict"
+    formatted_war = functions.telegram_format_war(response)
+    if telegram_channel:
+        telegram_bot.sendMessage(telegram_channel, formatted_war, parse_mode=ParseMode.MARKDOWN_V2)
