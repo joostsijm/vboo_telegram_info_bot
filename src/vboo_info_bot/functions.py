@@ -79,14 +79,16 @@ def telegram_format_war(war):
         roundk(war['damage']),
     )
 
-    link = '[mobile](https://m.rivalregions.com/#war/details/{}) \\| [desktop](http://rivalregions.com/#war/details/{})'.format(
-        war['war_id'],
-        war['war_id'],
+    link = '{} \\| {}'.format(
+        '[mobile](https://m.rivalregions.com/#war/details/{})'.format(war['war_id']),
+        '[desktop](http://rivalregions.com/#war/details/{})'.format(war['war_id']),
     )
 
-    formatted_war = '{}\n{}\n{}'.format(
+    formatted_war = '\n'.join([
         title,
         damage,
+        'finish: {} UTC'.format(escape_markdown(war['finish_date'].strftime('%Y-%m-%d %H:%M'), 2)),
+        'time left: {}'.format(escape_markdown(str(war['time_left']))),
         link,
-    )
+    ])
     return formatted_war
