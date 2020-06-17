@@ -190,7 +190,7 @@
         "rival-regions-wrapper": {
             "editable": true,
             "git": "https://github.com/jjoo914/rival_regions_wrapper",
-            "ref": "91965797a657c1c45d739e6a0889ec75402bdccc"
+            "ref": "df3133455205cdf4e28edcd61c36399fe4f5e7ad"
         },
         "selenium": {
             "hashes": [

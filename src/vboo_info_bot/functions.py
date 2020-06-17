@@ -5,30 +5,27 @@ from telegram.utils.helpers import escape_markdown
 
 def telegram_format_article(article):
     """Format article object for telegram"""
-    title = '*[{}](https://m.rivalregions.com/#news/show/{})*'.format(
-        escape_markdown(article['article_title'], 2),
-        article['article_id'],
-    )
-    author = '[{}](https://m.rivalregions.com/#slide/profile/{})'.format(
+    row_list = []
+    row_list.append('*{}*'.format(escape_markdown(article['article_title'], 2)))
+    row_list.append('by: [{}](https://m.rivalregions.com/#slide/profile/{})'.format(
         escape_markdown(article['author_name'], 2),
         article['author_id'],
-    )
-    underline = '{}, rating: {}, comments: {}'.format(
+    ))
+    row_list.append('{}, rating: {}, comments: {}'.format(
         escape_markdown(article['post_date'].strftime('%Y-%m-%d %H:%M'), 2),
         article['rating'],
         article['comments'],
-    )
-    if article['content_text'].strip():
-        article_content = '_{}_'.format(escape_markdown(article['content_text'][0:144].strip(), 2))
-    else:
-        article_content = ''
-    formatted_article = '{} by: {}\n{}\n{}'.format(
-        title,
-        author,
-        underline,
-        article_content,
-    )
-    return formatted_article
+    ))
+    if article['content_text']:
+        content = article['content_text'].replace('\n', ' ')[0:144]
+        content += '...' if len(content) >= 144 else ''
+        row_list.append('_{}_'.format(escape_markdown(content, 2)))
+
+    row_list.append('{} \\| {}'.format(
+        '[mobile](https://m.rivalregions.com/#news/show/{})'.format(article['article_id']),
+        '[desktop](http://rivalregions.com/#news/show/{})'.format(article['article_id']),
+    ))
+    return '\n'.join(row_list)
 
 def abbreviate(string, max_lenght):
     """Abriviate string to only first letters"""
@@ -62,8 +59,6 @@ def roundk(integer):
     if decimal == 0:
         return '{}{}'.format(integer, 'k' * thousand)
     return '{}.{}{}'.format(integer, decimal, 'k' * thousand)
-
-
 
 def telegram_format_war(war):
     """Format war object for article"""

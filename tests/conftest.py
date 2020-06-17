@@ -43,3 +43,16 @@ def api_wrapper():
         )
     authentication = LocalAuthentication(rr_username, rr_password, rr_login_method)
     return ApiWrapper(authentication)
+
+def pytest_addoption(parser):
+    """Pytest parser options"""
+    parser.addoption('--message', action='store_true', dest="message", \
+        default=False, help="enable messagedecorated tests")
+
+def pytest_configure(config):
+    """Pytest config"""
+    if not config.option.message:
+        setattr(config.option, 'markexpr', 'not message')
+    config.addinivalue_line(
+        "markers", "message: send telegram message"
+    )

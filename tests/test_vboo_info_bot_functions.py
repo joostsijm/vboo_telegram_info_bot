@@ -60,8 +60,25 @@ def test_article_info_two(api_wrapper, article_keys):
     assert isinstance(response['language'], str), "Language should be a string"
     assert isinstance(response['rating'], int), "Rating should be an integer"
 
+@pytest.mark.message
 @pytest.mark.vcr()
-def test_formatting_war_ground(api_wrapper, telegram_bot, telegram_channel):
+def test_send_article_message(api_wrapper, telegram_bot, telegram_channel):
+    """Test format war"""
+    article_id = 2867567
+    response = Article(api_wrapper).info(article_id)
+
+    assert isinstance(response, dict), "The response should be a dict"
+    formatted_article = functions.telegram_format_article(response)
+    if telegram_channel:
+        telegram_bot.sendMessage(
+            telegram_channel,
+            formatted_article,
+            parse_mode=ParseMode.MARKDOWN_V2
+        )
+
+@pytest.mark.message
+@pytest.mark.vcr()
+def test_send_war_ground_message(api_wrapper, telegram_bot, telegram_channel):
     """Test format war"""
     war_id = 329541
     response = War(api_wrapper).info(war_id)
@@ -71,8 +88,9 @@ def test_formatting_war_ground(api_wrapper, telegram_bot, telegram_channel):
     if telegram_channel:
         telegram_bot.sendMessage(telegram_channel, formatted_war, parse_mode=ParseMode.MARKDOWN_V2)
 
+@pytest.mark.message
 @pytest.mark.vcr()
-def test_formatting_war_coup(api_wrapper, telegram_bot, telegram_channel):
+def test_send_war_coup_message(api_wrapper, telegram_bot, telegram_channel):
     """Test format war"""
     war_id = 329518
     response = War(api_wrapper).info(war_id)
