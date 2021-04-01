@@ -13,7 +13,7 @@ tox-venv = "*"
 python-telegram-bot = "*"
 python-dotenv = "*"
 hyperlink = "*"
-rival-regions-wrapper = {editable = true, git = "https://github.com/jjoo914/rival_regions_wrapper"}
+rival-regions-wrapper = "*"
 
 [requires]
 python_version = "3"

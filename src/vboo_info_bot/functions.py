@@ -93,7 +93,7 @@ def telegram_format_war(war):
 
     if war['time_left']:
         row_list.append('time left: {}'.format(escape_markdown(str(war['time_left']))))
-    else:
+    elif 'max_hero_name' in war:
         row_list.append('max damage [{}](https://m.rivalregions.com/#slide/profile/{}): {}'.format(
             war['max_hero_name'],
             war['max_hero_id'],
