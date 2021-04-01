@@ -16,7 +16,7 @@ def cmd_start(update, context):
 
 def cmd_help(update, context):
     """Help command"""
-    update.message.reply_text('**HELP**', parse_mode=ParseMode.MARKDOWN)
+    update.message.reply_text('**HELP**\nSend link:\n- article\n- war', parse_mode=ParseMode.MARKDOWN)
 
 def text_handler(update, context):
     """Handle text"""
