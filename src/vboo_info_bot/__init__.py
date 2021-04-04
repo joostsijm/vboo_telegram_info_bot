@@ -6,7 +6,7 @@ import logging
 from dotenv import load_dotenv
 import telegram
 from telegram.ext import Updater
-from rival_regions_wrapper import LocalAuthentication, ApiWrapper
+from rival_regions_wrapper import LocalAuthentication
 
 
 load_dotenv()
@@ -54,5 +54,4 @@ if None in (RR_USERNAME, RR_PASSWORD, RR_LOGIN_METHOD):
         'RIVAL_REGIONS_USERNAME, RIVAL_REGIONS_PASSWORD, RIVAL_REGIONS_LOGIN_METHOD'
     )
 
-AUTHENTICATION = LocalAuthentication(RR_USERNAME, RR_PASSWORD, RR_LOGIN_METHOD)
-API_WRAPPER = ApiWrapper(AUTHENTICATION)
+API_WRAPPER = LocalAuthentication(RR_USERNAME, RR_PASSWORD, RR_LOGIN_METHOD)
