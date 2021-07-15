@@ -23,7 +23,7 @@ setuptools.setup(
         "python-telegram-bot",
         "python-dotenv",
         "hyperlink",
-        "rival-regions-wrapper @ git+https://github.com/jjoo914/rival_regions_wrapper.git",
+        "rival-regions-wrapper",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

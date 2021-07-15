@@ -6,7 +6,7 @@ import logging
 from dotenv import load_dotenv
 import telegram
 from telegram.ext import Updater
-from rival_regions_wrapper import LocalAuthentication
+from rival_regions_wrapper.middleware import LocalAuthentication
 
 
 load_dotenv()
@@ -54,4 +54,5 @@ if None in (RR_USERNAME, RR_PASSWORD, RR_LOGIN_METHOD):
         'RIVAL_REGIONS_USERNAME, RIVAL_REGIONS_PASSWORD, RIVAL_REGIONS_LOGIN_METHOD'
     )
 
-API_WRAPPER = LocalAuthentication(RR_USERNAME, RR_PASSWORD, RR_LOGIN_METHOD)
+API_WRAPPER = LocalAuthentication(False, os.environ.get('CAPTCHA_KEY', None))
+API_WRAPPER.set_credentials(RR_USERNAME, RR_PASSWORD, RR_LOGIN_METHOD)

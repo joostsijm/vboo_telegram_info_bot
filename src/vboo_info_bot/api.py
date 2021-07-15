@@ -1,7 +1,7 @@
 """API function"""
 
 
-from rival_regions_wrapper.api_wrapper import Article, War
+from rival_regions_wrapper.wrapper import Article, War
 
 from vboo_info_bot import API_WRAPPER
 
