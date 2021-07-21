@@ -38,10 +38,13 @@ def abbreviate(string, max_lenght):
 
 def format_state_region(side):
     """Format state and region name"""
-    state = '*[{}](https://m.rivalregions.com/#state/details/{})*'.format(
-        escape_markdown(abbreviate(side['state_name'], 4), 2),
-        side['state_id'],
-    )
+    if 'state_name' in side:
+        state = '*[{}](https://m.rivalregions.com/#state/details/{})*'.format(
+            escape_markdown(abbreviate(side['state_name'], 4), 2),
+            side['state_id'],
+        )
+    else:
+        return 'UNKNOWN'
     region = '[{}](http://m.rivalregions.com/#map/details/{})'.format(
         escape_markdown(side['region_name'], 2),
         side['region_id'],
