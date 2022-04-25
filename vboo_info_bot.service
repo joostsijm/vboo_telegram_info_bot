@@ -1,0 +1,12 @@
+[Unit]
+Description=VB00 info bot for RR
+
+[Service]
+ExecStart=/path/to/vboo-info-bot
+Restart=on-failure
+
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=/path/to/.env
+
+[Install]
+WantedBy=default.target
